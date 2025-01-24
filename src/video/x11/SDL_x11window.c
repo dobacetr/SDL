@@ -153,6 +153,7 @@ void X11_SetNetWMState(SDL_VideoDevice *_this, Window xwindow, SDL_WindowFlags f
     Atom _NET_WM_STATE_SKIP_TASKBAR = videodata->atoms._NET_WM_STATE_SKIP_TASKBAR;
     Atom _NET_WM_STATE_SKIP_PAGER = videodata->atoms._NET_WM_STATE_SKIP_PAGER;
     Atom _NET_WM_STATE_MODAL = videodata->atoms._NET_WM_STATE_MODAL;
+    Atom _NET_WM_STATE_DESKTOP = videodata->atoms._NET_WM_STATE_DESKTOP;
     Atom atoms[16];
     int count = 0;
 
@@ -184,6 +185,9 @@ void X11_SetNetWMState(SDL_VideoDevice *_this, Window xwindow, SDL_WindowFlags f
     }
     if (flags & SDL_WINDOW_MODAL) {
         atoms[count++] = _NET_WM_STATE_MODAL;
+    }
+    if(flags & SDL_WINDOW_DESKTOP){
+        atoms[count++] = _NET_WM_STATE_DESKTOP;
     }
 
     SDL_assert(count <= SDL_arraysize(atoms));
@@ -766,6 +770,8 @@ bool X11_CreateWindow(SDL_VideoDevice *_this, SDL_Window *window, SDL_Properties
         wintype_name = "_NET_WM_WINDOW_TYPE_TOOLTIP";
     } else if (window->flags & SDL_WINDOW_POPUP_MENU) {
         wintype_name = "_NET_WM_WINDOW_TYPE_POPUP_MENU";
+    } else if (window->flags & SDL_WINDOW_DESKTOP) {
+        wintype_name = "_NET_WM_WINDOW_TYPE_DESKTOP";
     } else if (hint && *hint) {
         wintype_name = hint;
     } else {

@@ -82,6 +82,7 @@ struct SDL_VideoData
         Atom _NET_WM_STATE_SKIP_TASKBAR;
         Atom _NET_WM_STATE_SKIP_PAGER;
         Atom _NET_WM_STATE_MODAL;
+        Atom _NET_WM_STATE_DESKTOP;
         Atom _NET_WM_MOVERESIZE;
         Atom _NET_WM_ALLOWED_ACTIONS;
         Atom _NET_WM_ACTION_FULLSCREEN;
